@@ -1,0 +1,57 @@
+/* src/app.css */
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+
+:root {
+  --santa-red: #d32f2f;
+  --santa-dark-red: #b71c1c;
+  --snow-white: #ffffff;
+  --elf-green: #388e3c;
+  --bg-color: #1a237e; /* Deep winter night blue */
+  
+  --material-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+  --snow-shadow: 0 -4px 4px rgba(255, 255, 255, 0.8); /* Glowy top snow */
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-color);
+  color: #ffffff;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* THE SNOW PILE CLASS 
+   This adds a fluffy white pseudo-element on top of any container 
+*/
+.snow-capped {
+  position: relative;
+  z-index: 1;
+}
+
+.snow-capped::before {
+  content: '';
+  position: absolute;
+  top: -4px; /* Sit on top */
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: white;
+  border-radius: 10px 10px 4px 4px; /* Fluffy shape */
+  box-shadow: 
+    0px 2px 0px #eee inset, /* Texture */
+    0 -2px 6px rgba(255, 255, 255, 0.9); /* Glow */
+  z-index: 2;
+  /* Make the snow look uneven/natural */
+  clip-path: polygon(
+    0% 50%, 5% 40%, 10% 60%, 15% 40%, 
+    20% 60%, 25% 40%, 30% 60%, 35% 40%, 
+    40% 60%, 45% 40%, 50% 60%, 55% 40%, 
+    60% 60%, 65% 40%, 70% 60%, 75% 40%, 
+    80% 60%, 85% 40%, 90% 60%, 95% 40%, 
+    100% 50%, 100% 100%, 0% 100%
+  );
+  transform: scaleY(-1); /* Flip so the bumps are on top */
+}
