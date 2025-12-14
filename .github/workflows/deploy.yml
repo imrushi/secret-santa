@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]  # Or 'master', depending on your default branch
+  workflow_dispatch:    # Allows you to run this manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25.x
+          cache: 'npm'
+          cache-dependency-path: ui/package-lock.json
+
+      - name: 📦 Install and Build
+        working-directory: ./ui # Point to your frontend folder
+        env:
+          # If you have a production backend URL, set it here or in GitHub Secrets
+          VITE_WS_URL: ${{ secrets.WS_URL }}
+          CI: false 
+        run: |
+          npm ci
+          npm run build
+
+      - name: 📂 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ui/dist # The folder the build script generated
+          branch: gh-pages # The branch the action should deploy to.

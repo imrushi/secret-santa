@@ -47,7 +47,9 @@
       `Connecting to WS... Action: ${action}, Room: ${roomCode}, Name: ${userName}`
     );
 
-    const wsUrl = `ws://localhost:8080/ws?room=${roomCode}&name=${userName}&action=${action}&avatar=${encodeURIComponent(
+    const baseUrl = import.meta.env.VITE_WS_URL || "ws://localhost:8007/ws";
+
+    const wsUrl = `${baseUrl}?room=${roomCode}&name=${userName}&action=${action}&avatar=${encodeURIComponent(
       selectedAvatar
     )}`;
     socket = new WebSocket(wsUrl);

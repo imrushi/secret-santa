@@ -60,8 +60,8 @@ func main() {
 	// The single WebSocket endpoint handling Create, Join and Game Loop
 	mux.HandleFunc("/ws", handleWebSocket)
 	// Start the server
-	fmt.Println("🎅 Santa Server started on :8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	fmt.Println("🎅 Santa Server started on :8007")
+	if err := http.ListenAndServe(":8007", mux); err != nil {
 		log.Fatal("Error starting server:", err)
 	}
 }

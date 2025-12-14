@@ -56,7 +56,7 @@ Follow these instructions to run the project locally.
     ```bash
     go run main.go
     ```
-    _The server will start on `http://localhost:8080`_
+    _The server will start on `http://localhost:8007`_
 
 ### 2. Frontend Setup (Svelte)
 
